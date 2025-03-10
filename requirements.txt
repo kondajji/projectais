@@ -1,0 +1,13 @@
+langchain
+llama-index
+openai
+python-dotenv
+langchain-community
+spacy
+transformers
+torch
+accelerate
+sentencepiece
+sentence-transformers
+scikit-learn
+langchain-openai
