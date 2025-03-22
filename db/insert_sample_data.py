@@ -21,7 +21,23 @@ def insert_sample_contracts():
     cursor.executemany(query, contracts)
     conn.commit()
     conn.close()
-    print("✅ Sample contract data inserted successfully!")
+    print(" Sample contract data inserted successfully!")
+
+
+def load_bulk_contract():
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+# Load Data
+    with open("./db/contracts_data.sql", "r") as f:
+        cursor.executescript(f.read())
+
+    conn.commit()
+    conn.close()
+
+print("Database refreshed and loaded with new contract data!")
 
 if __name__ == "__main__":
-    insert_sample_contracts()
+    #insert_sample_contracts()
+    load_bulk_contract()

@@ -13,18 +13,20 @@ def get_db_connection():
 def create_contract_table():
     """Create the contracts table if it does not exist."""
     query = """
-    CREATE TABLE IF NOT EXISTS contracts (
-        contract_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        vendor_id INTEGER NOT NULL,
-        vendor_name TEXT NOT NULL,
-        start_date TEXT NOT NULL,
-        end_date TEXT NOT NULL,
-        contract_value REAL NOT NULL,
-        invoiced_amount REAL NOT NULL,
-        payment_status TEXT CHECK(payment_status IN ('Paid', 'Partially Paid', 'Unpaid')),
-        contract_status TEXT CHECK(contract_status IN ('Active', 'Expired', 'Cancelled')),
-        renewal_date TEXT NULL
-    );
+ 
+ CREATE TABLE contracts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    vendor_name TEXT NOT NULL,
+    po_number TEXT NOT NULL,  -- Allows duplicate values for multiple invoices
+    invoice_date DATE NOT NULL,
+    invoice_amount FLOAT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    contract_value FLOAT NOT NULL,
+    payment_status TEXT CHECK(payment_status IN ('Paid', 'Pending', 'Overdue')),
+    contract_status TEXT CHECK(contract_status IN ('Active', 'Expired', 'Terminated')),
+    renewal_date DATE
+);
     """
     conn = get_db_connection()
     cursor = conn.cursor()

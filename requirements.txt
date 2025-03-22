@@ -11,3 +11,4 @@ sentencepiece
 sentence-transformers
 scikit-learn
 langchain-openai
+sqlalchemy

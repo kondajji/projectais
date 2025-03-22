@@ -15,7 +15,7 @@ vendor_extraction_prompt = PromptTemplate(
     input_variables=["query"],
     template="""
     Extract the software or vendor name from this query:
-    "{query}"
+    "{query}" 
     
     If no vendor is found, return "None". Just return the name, no explanations.
     """
